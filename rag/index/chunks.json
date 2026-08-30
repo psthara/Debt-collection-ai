@@ -1,0 +1,74 @@
+[
+  {
+    "title": "collection_policy",
+    "text": "# Collection Policy"
+  },
+  {
+    "title": "collection_policy",
+    "text": "Customer communications must be respectful, accurate, and consistent with approved lender policy."
+  },
+  {
+    "title": "collection_policy",
+    "text": "Agents must use the approved authentication process before disclosing account-specific information."
+  },
+  {
+    "title": "collection_policy",
+    "text": "Agents may discuss repayment arrangements only within their approved authority."
+  },
+  {
+    "title": "collection_policy",
+    "text": "A promise-to-pay should record the promised amount and date in the approved collection system."
+  },
+  {
+    "title": "collection_policy",
+    "text": "If a customer indicates financial hardship, follow the approved hardship-assessment process."
+  },
+  {
+    "title": "collection_policy",
+    "text": "Exceptions outside agent authority must be escalated to an authorized human reviewer."
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "# Communication Guidelines"
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "Use professional and empathetic language."
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "Do not shame, threaten, abuse, deceive, or mislead the customer."
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "Do not claim legal action, penalties, credit reporting consequences, discounts, waivers, or settlement approval unless explicitly supported by approved policy."
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "The AI must not invent a repayment plan or legal consequence."
+  },
+  {
+    "title": "communication_guidelines",
+    "text": "When policy is missing or ambiguous, refer the matter to an authorized human reviewer."
+  },
+  {
+    "title": "ptp_policy",
+    "text": "# Promise To Pay Policy"
+  },
+  {
+    "title": "ptp_policy",
+    "text": "A promise-to-pay should capture the promised amount and promised date."
+  },
+  {
+    "title": "ptp_policy",
+    "text": "Previous PTP behavior can be used as a risk signal, but an ML score alone must not determine whether a customer receives or is denied an option."
+  },
+  {
+    "title": "ptp_policy",
+    "text": "If a customer cannot meet a previous promise, reassess the situation under approved policy."
+  },
+  {
+    "title": "ptp_policy",
+    "text": "PTP exceptions should be reviewed by an authorized collection supervisor."
+  }
+]
