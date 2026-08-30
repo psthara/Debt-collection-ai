@@ -2,12 +2,12 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import requests
-
+import os
 # ============================================================
 # CONFIG
 # ============================================================
 
-API_URL = "http://127.0.0.1:8000"
+API_URL = os.getenv("API_URL","http://127.0.0.1:8000",).rstrip("/")
 
 st.set_page_config(
     page_title="AI Debt Collection Intelligence",
@@ -836,7 +836,7 @@ if st.button(
     try:
 
         response = requests.post(
-            f"{API_URL}/generate-message",
+            f"{API_URL}/genai/message",
             json=payload,
             timeout=60
         )
