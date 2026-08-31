@@ -6,7 +6,6 @@ from .rag_service import RAGService
 from .genai import generate_message
 
 app=FastAPI(title="Debt Collection AI",version="1.0")
-
 try:
     ml=MLService()
     ML_ERROR=None
@@ -39,9 +38,38 @@ def query(q:RAGQuery):
     return rag.answer(q.question)
 
 @app.post("/generate-message")
-def message(req:MessageRequest):
-    if ml is None: raise HTTPException(503,ML_ERROR)
-    scores=ml.predict(req.customer)
-    action=next_best_action(req.customer,scores)
-    return {"customer_id":req.customer.customer_id,
-            "action":action,"message":generate_message(req.customer,action,req.tone)}
+def message(req: MessageRequest):
+
+    if ml is None:
+        raise HTTPException(
+            status_code=503,
+            detail=f"ML service unavailable: {ML_ERROR}"
+        )
+
+    try:
+        scores = ml.predict(req.customer)
+
+        action = next_best_action(
+            req.customer,
+            scores
+        )
+
+        message_text = generate_message(
+            req.customer,
+            action,
+            req.tone
+        )
+
+        return {
+            "customer_id": req.customer.customer_id,
+            "customer_name": req.customer.customer_name,
+            "action": action,
+            "message_source": "gemini_llm",
+            "message": message_text
+        }
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=503,
+            detail=f"LLM generation failed: {str(e)}"
+        )

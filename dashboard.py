@@ -27,6 +27,8 @@ def load_data():
     n = 500
     df = pd.DataFrame({
         "customer_id": [f"C{1000+i}" for i in range(n)],
+        "customer_name": [
+        f"Customer {1000+i}" for i in range(n)],
         "age": np.random.randint(21, 70, n),
         "income": np.random.randint(
             20000,
@@ -115,7 +117,10 @@ def load_data():
             n
         )
     })
-
+    df["due_date"] = (
+                        pd.Timestamp.today().normalize()
+                        - pd.to_timedelta(df["dpd"], unit="D")
+                    ).dt.strftime("%d-%m-%Y")
     # --------------------------------------------------------
     # Simulated AI predictions
     # --------------------------------------------------------
@@ -527,7 +532,9 @@ with col1:
     st.write(
         f"**Customer ID:** {customer['customer_id']}"
     )
-
+    st.write(
+        f"**Customer Name:** {customer['customer_name']}"
+    )
     st.write(
         f"**Age:** {customer['age']}"
     )
@@ -549,7 +556,9 @@ with col2:
     st.write(
         f"**Loan Amount:** ₹{customer['loan_amount']:,.0f}"
     )
-
+    st.write(
+            f"**Due Date:** {customer['due_date']}"
+        )
     st.write(
         f"**Outstanding:** ₹{customer['outstanding_amount']:,.0f}"
     )
@@ -762,6 +771,8 @@ if st.button(
 
             "customer_id":
                 customer["customer_id"],
+            "customer_name": str(customer["customer_name"]),
+            "due_date": str(customer["due_date"]),
 
             "age":
                 int(customer["age"]),
