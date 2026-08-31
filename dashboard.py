@@ -857,7 +857,7 @@ if st.button(
         response = requests.post(
             f"{API_URL}/generate-message",
             json=payload,
-            timeout=60
+            timeout=120
         )
 
         if response.status_code == 200:
