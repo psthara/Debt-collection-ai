@@ -7,7 +7,9 @@ import os
 # CONFIG
 # ============================================================
 
-API_URL = os.getenv("API_URL","http://127.0.0.1:8000",).rstrip("/")
+#API_URL = os.getenv("API_URL","http://127.0.0.1:8000",).rstrip("/")
+API_URL = os.getenv("API_URL","https://debt-collection-api-455207252491.asia-south1.run.app",).rstrip("/")
+
 
 st.set_page_config(
     page_title="Debt Collection Intelligence",
@@ -834,9 +836,8 @@ if st.button(
     }
 
     try:
-
         response = requests.post(
-            f"{API_URL}/genai/message",
+            f"{API_URL}/generate-message",
             json=payload,
             timeout=60
         )
