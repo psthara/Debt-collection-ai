@@ -745,6 +745,13 @@ tone = st.selectbox(
     ]
 )
 
+current_customer_id = str(customer["customer_id"])
+
+# Never reuse a generated message for a different customer.
+if st.session_state.get("message_customer_id") != current_customer_id:
+    st.session_state["message_customer_id"] = current_customer_id
+    st.session_state["generated_message"] = ""
+
 if st.button(
     "Generate Collection Message"
 ):
@@ -846,16 +853,12 @@ if st.button(
 
             result = response.json()
 
-            st.write(
-                "### AI Generated Message"
-            )
+            generated_message = result.get("message", "").strip()
 
-            st.info(
-                result.get(
-                    "message",
-                    ""
-                )
-            )
+            if generated_message:
+                st.session_state["generated_message"] = generated_message
+            else:
+                st.error("FastAPI returned an empty message.")
 
         else:
 
@@ -868,6 +871,25 @@ if st.button(
         st.error(
             f"Could not connect to FastAPI: {e}"
         )
+
+# ============================================================
+# DELIVERY CHANNEL PLACEHOLDERS
+# ============================================================
+
+if st.session_state.get("generated_message"):
+
+    st.write("### AI Generated Message")
+    st.info(st.session_state["generated_message"])
+
+    mail_column, whatsapp_column = st.columns(2)
+
+    with mail_column:
+        if st.button("📧 Mail", use_container_width=True):
+            st.info("Mail option selected. Sending will be added later.")
+
+    with whatsapp_column:
+        if st.button("💬 WhatsApp", use_container_width=True):
+            st.info("WhatsApp option selected. Sending will be added later.")
 
 # ============================================================
 # FOOTER
